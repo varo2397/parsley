@@ -11,9 +11,6 @@ export const conditions = [{
     "type": "cardiovascular",
     "condition": "Coronary heart disease"
   }, {
-    "type": "cardiovascular",
-    "condition": "Coronary heart disease"
-  }, {
     "type": "gastrointestinal",
     "condition": "IBS"
   }, {
