@@ -26,7 +26,11 @@ const maritalStatusOptions = [
     {label: "Other", value: "other"},
 ]
 
-export const DemographicForm = (): JSX.Element => {
+type Props = {
+    disabled?: boolean;
+}
+
+export const DemographicForm = ({disabled = false}: Props): JSX.Element => {
 
     const {value: 
         {
@@ -49,36 +53,36 @@ export const DemographicForm = (): JSX.Element => {
         <Box component="form">
             <Grid container spacing={4}>
                 <Grid item xs={4}>
-                    <TextInput onChange={(value) => onChange('firstName', value)} value={firstName} fullWidth label="First Name"/>
+                    <TextInput onChange={(value) => onChange('firstName', value)} value={firstName} fullWidth label="First Name" disabled={disabled} />
                 </Grid>
                 <Grid item xs={4}>
-                    <TextInput onChange={(value) => onChange('lastName', value)} value={lastName}fullWidth label="Last Name"/>
+                    <TextInput onChange={(value) => onChange('lastName', value)} value={lastName}fullWidth label="Last Name" disabled={disabled} />
                 </Grid>
                 <Grid item xs={4}>
-                    <TextInput onChange={(value) => onChange('email', value)} value={email} label="Email" type="email" fullWidth/>
+                    <TextInput onChange={(value) => onChange('email', value)} value={email} label="Email" type="email" fullWidth disabled={disabled} />
                 </Grid>
                 <Grid item xs={4}>
                     <DatePicker onChange={(value) => {
                         onChange('birthDate', value?.toJSDate() || new Date())
-                    }} value={birthDate} fullWidth label="Date of Birth"/>
+                    }} value={birthDate} fullWidth label="Date of Birth" disabled={disabled} />
                 </Grid>
                 <Grid item xs={4}>
-                    <SelectInput onChange={(value) => onChange('gender', value)} value={gender} label="Gender" items={genders} fullWidth />
+                    <SelectInput onChange={(value) => onChange('gender', value)} value={gender} label="Gender" items={genders} fullWidth disabled={disabled}  />
                 </Grid>
                 <Grid item xs={4}>
-                    <SelectInput items={maritalStatusOptions} onChange={(value) => onChange('maritalStatus', value)}fullWidth value={maritalStatus} label="Marital Status"/>
+                    <SelectInput items={maritalStatusOptions} onChange={(value) => onChange('maritalStatus', value)}fullWidth value={maritalStatus} label="Marital Status" disabled={disabled} />
                 </Grid>
                 <Grid item xs={3}>
-                    <TextInput onChange={(value) => onChange('streetAddress', value)} value={streetAddress}fullWidth label="Street Address" multiline/>
+                    <TextInput onChange={(value) => onChange('streetAddress', value)} value={streetAddress}fullWidth label="Street Address" multiline disabled={disabled} />
                 </Grid>
                 <Grid item xs={3}>
-                    <SelectInput items={states} onChange={(value) => onChange('state', value)} value={state} fullWidth label="State"/>
+                    <SelectInput items={states} onChange={(value) => onChange('state', value)} value={state} fullWidth label="State" disabled={disabled} />
                 </Grid>
                 <Grid item xs={3}>
-                    <SelectInput items={cities} onChange={(value) => onChange('city', value)} value={city}fullWidth label="City"/>
+                    <SelectInput items={cities} onChange={(value) => onChange('city', value)} value={city}fullWidth label="City" disabled={disabled} />
                 </Grid>
                 <Grid item xs={3}>
-                    <TextInput onChange={(value) => onChange('zipcode', value)} value={zipcode.toString()}fullWidth label="Zip" type="number"/>
+                    <TextInput onChange={(value) => onChange('zipcode', value)} value={zipcode.toString()}fullWidth label="Zip" type="number" disabled={disabled} />
                 </Grid>
             </Grid>
         </Box>

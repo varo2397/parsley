@@ -9,9 +9,10 @@ type Props = {
     multiline?: boolean
     label?: string
     fullWidth?: boolean
+    disabled?: boolean
 }
 
-export const TextInput = ({onChange, placeholder, value, hasError, helperMessage, label, type = "text", multiline = false, fullWidth}: Props): JSX.Element => {
+export const TextInput = ({onChange, placeholder, value, hasError, helperMessage, label, type = "text", multiline = false, fullWidth, disabled}: Props): JSX.Element => {
     return <TextField 
         variant="outlined" 
         type={type} 
@@ -23,5 +24,6 @@ export const TextInput = ({onChange, placeholder, value, hasError, helperMessage
         onChange={(e) => onChange(e.target.value)} 
         helperText={helperMessage} 
         fullWidth={fullWidth} 
+        disabled={disabled}
     />
 }

@@ -6,7 +6,8 @@ const useStyles = makeStyles({
       display: 'flex',
       marginLeft: '4rem',
       marginRight: '4rem',
-      marginTop: '1rem'
+      marginTop: '1rem',
+      marginBottom: '2rem',
     },
 });
 

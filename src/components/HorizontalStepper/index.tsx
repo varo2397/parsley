@@ -5,8 +5,6 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@material-ui/styles';
-import { useHistory } from "react-router-dom";
-import {routes} from 'shared/constants'
 
 const useStyles = makeStyles({
     root: {
@@ -35,16 +33,16 @@ type Props = {
     label: string;
     component: JSX.Element
   }[]
+  onEnd: () => void
 }
 
-export const HorizontalStepper = ({steps}: Props): JSX.Element => {
+export const HorizontalStepper = ({steps, onEnd}: Props): JSX.Element => {
   const classes = useStyles()
   const [activeStep, setActiveStep] = useState(0);
-  const history = useHistory()
 
   const handleNext = () => {
     if(activeStep === steps.length - 1) {
-      history.push(routes.SUMMARY)
+      onEnd()
       return
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

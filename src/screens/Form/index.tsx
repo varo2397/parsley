@@ -3,6 +3,8 @@ import {ConditionsForm} from 'components/ConditionsForm'
 import {HorizontalStepper} from 'components/HorizontalStepper'
 import {MedicalForm} from 'components/MedicalForm'
 import { makeStyles } from '@material-ui/styles';
+import { useHistory } from "react-router-dom";
+import {routes} from 'shared/constants'
 
 const useStyles = makeStyles({
     root: {
@@ -28,7 +30,8 @@ const steps = [
 
 export const Form = (): JSX.Element => {
     const classes = useStyles()
+    const history = useHistory()
     return <div className={classes.root}>
-        <HorizontalStepper steps={steps}/>
+        <HorizontalStepper steps={steps} onEnd={() => history.push(routes.SUMMARY)}/>
     </div>
 }
