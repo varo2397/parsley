@@ -53,7 +53,7 @@ export const Summary = (): JSX.Element => {
             Summary
         </Typography>
 
-        <Paper elevation={3} className={classes.paperContainer} variant="outlined">
+        <Paper className={classes.paperContainer} variant="outlined">
             <div className={classes.titleContainer}>
                 <Typography variant="h4" component="div" color="primary">
                     General Information
@@ -65,7 +65,7 @@ export const Summary = (): JSX.Element => {
             <DemographicForm disabled={demographicDisabled} />
         </Paper>
 
-        <Paper elevation={3} className={classes.paperContainer} variant="outlined">
+        <Paper className={classes.paperContainer} variant="outlined">
             <div className={classes.titleContainer}>
                     <Typography variant="h4" component="div" color="primary">
                     Conditions Information
@@ -77,7 +77,7 @@ export const Summary = (): JSX.Element => {
             <ConditionsForm disabled={conditionsDisabled} />
         </Paper>
         
-        <Paper elevation={3} className={classes.paperContainer} variant="outlined">
+        <Paper className={classes.paperContainer} variant="outlined">
             <div className={classes.titleContainer}>
                     <Typography variant="h4" component="div" color="primary">
                     Medical Information

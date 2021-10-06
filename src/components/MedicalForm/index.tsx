@@ -16,8 +16,8 @@ export const MedicalForm = ({disabled}: Props): JSX.Element => {
     return <Box component="form">
         <Grid container spacing={5}>
             {medicalQuestions.map(({detail, question}) => (
-                 <Grid item xs={6}>
-                    <TextInput value={get(currentMedical, question)} disabled={disabled} onChange={(value) => onChange(question, value)} key={question} helperMessage={detail} multiline label={question} fullWidth/> 
+                 <Grid key={question} item xs={6}>
+                    <TextInput value={get(currentMedical, question)} disabled={disabled} onChange={(value) => onChange(question, value)} helperMessage={detail} multiline label={question} fullWidth/> 
                 </Grid>
             ))}
         </Grid>

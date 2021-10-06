@@ -32,7 +32,7 @@ export const RadioInput = ({ label, items, value, onChange, row = true, disabled
                 onChange={onChangeEvent}
             >
                 {items.map(({ label, value }) => {
-                    return <FormControlLabel value={value} control={<Radio />} label={label} disabled={disabled} />
+                    return <FormControlLabel value={value} key={new Date().toString()} control={<Radio />} label={label} disabled={disabled} />
                 })}
             </RadioGroup>
         </FormControl>

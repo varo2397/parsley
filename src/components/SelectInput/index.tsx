@@ -25,7 +25,7 @@ export const SelectInput = ({items, placeholder, value, onChange, label, disable
         <FormControl fullWidth={fullWidth}>
             <InputLabel>{label}</InputLabel>
             <Select placeholder={placeholder} value={value} label={label} onChange={onChangeEvent} disabled={disabled} >
-                {items.map(({value, label}) => <MenuItem value={value}>{label}</MenuItem>)}
+                {items.map(({value, label}) => <MenuItem key={label} value={value}>{label}</MenuItem>)}
             </Select>
         </FormControl>
     )

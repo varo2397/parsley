@@ -32,7 +32,7 @@ export const ConditionsForm = ({disabled}: Props): JSX.Element => {
     return <Box className={classes.root} component="form">
         <Grid container>
             {groupedConditions.map(({conditions, type}) => 
-                <Grid key={type} xs={3}>
+                <Grid key={type} item xs={3}>
                     <Typography variant="h5" color="primary">
                         {type}
                     </Typography>
