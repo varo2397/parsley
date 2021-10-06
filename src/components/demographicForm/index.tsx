@@ -48,37 +48,37 @@ export const DemographicForm = (): JSX.Element => {
     return (
         <Box component="form">
             <Grid container spacing={4}>
-                <Grid item>
-                    <TextInput onChange={(value) => onChange('firstName', value)} value={firstName} label="First Name"/>
+                <Grid item xs={4}>
+                    <TextInput onChange={(value) => onChange('firstName', value)} value={firstName} fullWidth label="First Name"/>
                 </Grid>
-                <Grid item>
-                    <TextInput onChange={(value) => onChange('lastName', value)} value={lastName} label="Last Name"/>
+                <Grid item xs={4}>
+                    <TextInput onChange={(value) => onChange('lastName', value)} value={lastName}fullWidth label="Last Name"/>
                 </Grid>
-                <Grid item>
-                    <SelectInput onChange={(value) => onChange('gender', value)} value={gender} label="Gender" items={genders} />
+                <Grid item xs={4}>
+                    <TextInput onChange={(value) => onChange('email', value)} value={email} label="Email" type="email" fullWidth/>
                 </Grid>
-                <Grid item>
+                <Grid item xs={4}>
                     <DatePicker onChange={(value) => {
                         onChange('birthDate', value?.toJSDate() || new Date())
-                    }} value={birthDate} label="Date of Birth"/>
+                    }} value={birthDate} fullWidth label="Date of Birth"/>
                 </Grid>
-                <Grid item>
-                    <TextInput onChange={(value) => onChange('email', value)} value={email} label="Email" type="email"/>
+                <Grid item xs={4}>
+                    <SelectInput onChange={(value) => onChange('gender', value)} value={gender} label="Gender" items={genders} fullWidth />
                 </Grid>
-                <Grid item>
-                    <TextInput onChange={(value) => onChange('streetAddress', value)} value={streetAddress} label="Street Address" multiline/>
+                <Grid item xs={4}>
+                    <SelectInput items={maritalStatusOptions} onChange={(value) => onChange('maritalStatus', value)}fullWidth value={maritalStatus} label="Marital Status"/>
                 </Grid>
-                <Grid item>
-                    <SelectInput items={states} onChange={(value) => onChange('state', value)} value={state} label="State"/>
+                <Grid item xs={3}>
+                    <TextInput onChange={(value) => onChange('streetAddress', value)} value={streetAddress}fullWidth label="Street Address" multiline/>
                 </Grid>
-                <Grid item>
-                    <SelectInput items={cities} onChange={(value) => onChange('city', value)} value={city} label="City"/>
+                <Grid item xs={3}>
+                    <SelectInput items={states} onChange={(value) => onChange('state', value)} value={state} fullWidth label="State"/>
                 </Grid>
-                <Grid item>
-                    <TextInput onChange={(value) => onChange('zipcode', value)} value={zipcode.toString()} label="Zip" type="number"/>
+                <Grid item xs={3}>
+                    <SelectInput items={cities} onChange={(value) => onChange('city', value)} value={city}fullWidth label="City"/>
                 </Grid>
-                <Grid item>
-                    <SelectInput items={maritalStatusOptions} onChange={(value) => onChange('maritalStatus', value)} value={maritalStatus} label="Marital Status"/>
+                <Grid item xs={3}>
+                    <TextInput onChange={(value) => onChange('zipcode', value)} value={zipcode.toString()}fullWidth label="Zip" type="number"/>
                 </Grid>
             </Grid>
         </Box>

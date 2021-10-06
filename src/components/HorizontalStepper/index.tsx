@@ -1,10 +1,34 @@
-import {useState, createElement, useMemo, Fragment} from 'react';
+import {useState, useMemo, Fragment} from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { makeStyles } from '@material-ui/styles';
+import { useHistory } from "react-router-dom";
+import {routes} from 'shared/constants'
+
+const useStyles = makeStyles({
+    root: {
+      flex: 1,
+    },
+    stepperContainer: {
+      marginBottom: '2rem',
+    },
+    stepperButtonsContainer: {
+      display: 'flex', 
+      flexDirection: 'row', 
+      paddingTop: '2rem',
+      justifyContent: 'space-between'
+    },
+    backButton: {
+      mr: 1
+    },
+    contentContainer: {
+      minHeight: '50%',
+    }
+
+});
 
 type Props = {
   steps: {
@@ -14,21 +38,20 @@ type Props = {
 }
 
 export const HorizontalStepper = ({steps}: Props): JSX.Element => {
+  const classes = useStyles()
   const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set<number>());
+  const history = useHistory()
 
   const handleNext = () => {
-    let newSkipped = skipped;
+    if(activeStep === steps.length - 1) {
+      history.push(routes.SUMMARY)
+      return
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
   };
 
   const CurrentStepComponent = useMemo(() => {
@@ -36,9 +59,10 @@ export const HorizontalStepper = ({steps}: Props): JSX.Element => {
   }, [activeStep, steps])
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Stepper activeStep={activeStep}>
-        {steps.map(({label}, index) => {
+    <Box className={classes.root}>
+
+      <Stepper activeStep={activeStep} className={classes.stepperContainer}>
+        {steps.map(({label}) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: {
             optional?: React.ReactNode;
@@ -50,35 +74,23 @@ export const HorizontalStepper = ({steps}: Props): JSX.Element => {
           );
         })}
       </Stepper>
-      {activeStep === steps.length ? (
-        <Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </Fragment>
-      ) : (
+      
         <Fragment>
           {CurrentStepComponent}
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+          <Box className={classes.stepperButtonsContainer}>
             <Button
               color="inherit"
               disabled={activeStep === 0}
               onClick={handleBack}
-              sx={{ mr: 1 }}
+              className={classes.backButton}
             >
               Back
             </Button>
-            <Box sx={{ flex: '1 1 auto' }} />
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              {activeStep === steps.length - 1 ? 'Summary' : 'Next'}
             </Button>
           </Box>
         </Fragment>
-      )}
     </Box>
   );
 }

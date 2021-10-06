@@ -1,5 +1,7 @@
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 type Props = {
     items: {
@@ -11,14 +13,20 @@ type Props = {
     onChange: (value: string) => void
     disabled?: boolean
     label: string
+    fullWidth?: boolean
 }
 
-export const SelectInput = ({items, placeholder, value, onChange, label, disabled = false}: Props): JSX.Element => {
+export const SelectInput = ({items, placeholder, value, onChange, label, disabled = false, fullWidth = false}: Props): JSX.Element => {
     const onChangeEvent = (event: SelectChangeEvent) => {
         onChange(event.target.value)
     }
 
-    return <Select placeholder={placeholder} value={value} label={label} onChange={onChangeEvent} disabled={disabled}>
-        {items.map(({value, label}) => <MenuItem value={value}>{label}</MenuItem>)}
-    </Select>
+    return (
+        <FormControl fullWidth={fullWidth}>
+            <InputLabel>{label}</InputLabel>
+            <Select placeholder={placeholder} value={value} label={label} onChange={onChangeEvent} disabled={disabled} >
+                {items.map(({value, label}) => <MenuItem value={value}>{label}</MenuItem>)}
+            </Select>
+        </FormControl>
+    )
 }
