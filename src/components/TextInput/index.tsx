@@ -7,8 +7,9 @@ type Props = {
     helperMessage?: string
     type?: "text" | "number"
     multiline?: boolean
+    label?: string
 }
 
-export const TextInput = ({onChange, placeholder, value, hasError, helperMessage: errorMessage, type = "text", multiline = false}: Props): JSX.Element => {
-    return <TextField variant="outlined" type={type} value={value} error={hasError} placeholder={placeholder} multiline={multiline} onChange={(e) => onChange(e.target.value)} helperText={hasError && errorMessage ? errorMessage : ""}/>
+export const TextInput = ({onChange, placeholder, value, hasError, helperMessage: errorMessage, label, type = "text", multiline = false}: Props): JSX.Element => {
+    return <TextField variant="outlined" type={type} value={value} error={hasError} placeholder={placeholder} label={label} multiline={multiline} onChange={(e) => onChange(e.target.value)} helperText={hasError && errorMessage ? errorMessage : ""}/>
 }
