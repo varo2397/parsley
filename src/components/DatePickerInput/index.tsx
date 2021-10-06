@@ -1,11 +1,12 @@
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
+import {DateTime} from 'luxon';
 
 type Props = {
     label: string
     value: Date | null
     inputFormat?: string
-    onChange: (date: Date | null) => void
+    onChange: (date: DateTime | null) => void
     disabled?: boolean
 }
 

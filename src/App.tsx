@@ -3,11 +3,14 @@ import './App.css';
 import {Navigator} from 'routes'
 import DateAdapter from '@mui/lab/AdapterLuxon';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import {GeneralInformationProvider} from './state/generalInformation'
 
 function App() {
   return (
     <LocalizationProvider dateAdapter={DateAdapter}>
-      <Navigator />
+      <GeneralInformationProvider>
+        <Navigator />
+      </GeneralInformationProvider>
     </LocalizationProvider>
   );
 }

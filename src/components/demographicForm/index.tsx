@@ -4,8 +4,9 @@ import {DatePicker} from '../DatePickerInput'
 import {statesWithCities} from 'shared/constants'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import {get} from 'lodash'
+import { GeneralInformationContext } from 'state/generalInformation';
 
 const genders = [
     {label: 'Female', value: 'female'},
@@ -15,7 +16,7 @@ const genders = [
 
 const states = Object.keys(statesWithCities).map((state) => ({label: state, value: state}))
 
-const maritalStatus = [
+const maritalStatusOptions = [
     {label: "Married", value: "married"},
     {label: "Single", value: "single"},
     {label: "Divorced", value: "divorced"},
@@ -27,14 +28,19 @@ const maritalStatus = [
 
 export const DemographicForm = (): JSX.Element => {
 
-    const [state, setState] = useState('')
+    const {value: 
+        {
+            birthDate, city, email, firstName, gender, lastName, maritalStatus, state, streetAddress, zipcode
+        },
+        onChange,
+    } = useContext(GeneralInformationContext)
+
     const [cities, setCities] = useState<{label: string, value: string}[]>([])
 
     useEffect(() => {
         if(state) {
             const currentStateCities = get(statesWithCities, state, []) as string[]
             const formattedCities = currentStateCities.map((city) => ({label: city, value: city}))
-            console.log(formattedCities)
             setCities(formattedCities)
         }
     }, [state])
@@ -43,34 +49,36 @@ export const DemographicForm = (): JSX.Element => {
         <Box component="form">
             <Grid container spacing={4}>
                 <Grid item>
-                    <TextInput onChange={() => null} value={""} placeholder="First Name"/>
+                    <TextInput onChange={(value) => onChange('firstName', value)} value={firstName} label="First Name"/>
                 </Grid>
                 <Grid item>
-                    <TextInput onChange={() => null} value={""} placeholder="Last Name"/>
+                    <TextInput onChange={(value) => onChange('lastName', value)} value={lastName} label="Last Name"/>
                 </Grid>
                 <Grid item>
-                    <SelectInput onChange={() => null} value={""} label="Gender" items={genders} placeholder="Gender"/>
+                    <SelectInput onChange={(value) => onChange('gender', value)} value={gender} label="Gender" items={genders} />
                 </Grid>
                 <Grid item>
-                    <DatePicker onChange={() => null} value={null} label="Date of Birth"/>
+                    <DatePicker onChange={(value) => {
+                        onChange('birthDate', value?.toJSDate() || new Date())
+                    }} value={birthDate} label="Date of Birth"/>
                 </Grid>
                 <Grid item>
-                    <TextInput onChange={() => null} value={""} placeholder="Email"/>
+                    <TextInput onChange={(value) => onChange('email', value)} value={email} label="Email" type="email"/>
                 </Grid>
                 <Grid item>
-                    <TextInput onChange={() => null} value={""} placeholder="Street Address" multiline/>
+                    <TextInput onChange={(value) => onChange('streetAddress', value)} value={streetAddress} label="Street Address" multiline/>
                 </Grid>
                 <Grid item>
-                    <SelectInput items={states} onChange={(newState) => setState(newState)} value={""} label="State"/>
+                    <SelectInput items={states} onChange={(value) => onChange('state', value)} value={state} label="State"/>
                 </Grid>
                 <Grid item>
-                    <SelectInput items={cities} onChange={() => null} value={""} label="City"/>
+                    <SelectInput items={cities} onChange={(value) => onChange('city', value)} value={city} label="City"/>
                 </Grid>
                 <Grid item>
-                    <TextInput onChange={() => null} value={""} placeholder="Zip" type="number"/>
+                    <TextInput onChange={(value) => onChange('zipcode', value)} value={zipcode.toString()} label="Zip" type="number"/>
                 </Grid>
                 <Grid item>
-                    <SelectInput items={maritalStatus} onChange={() => null} value={""} label="Marital Status"/>
+                    <SelectInput items={maritalStatusOptions} onChange={(value) => onChange('maritalStatus', value)} value={maritalStatus} label="Marital Status"/>
                 </Grid>
             </Grid>
         </Box>

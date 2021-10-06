@@ -5,7 +5,7 @@ type Props = {
     onChange: (value: string) => void 
     hasError?: boolean
     helperMessage?: string
-    type?: "text" | "number"
+    type?: "text" | "number" | "email"
     multiline?: boolean
     label?: string
 }
