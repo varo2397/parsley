@@ -1,4 +1,4 @@
-import {DemographicForm} from 'components/DemographicForm'
+import {DemographicForm} from 'components/DemographicsForm'
 import {ConditionsForm} from 'components/ConditionsForm'
 import {MedicalForm} from 'components/MedicalForm'
 import { makeStyles } from '@material-ui/styles';
